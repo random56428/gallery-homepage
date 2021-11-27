@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        <link href="randomvideostyles.css" rel="stylesheet">
+        <link rel="icon" href="./icon/icon.png" type="image/x-icon">
+
+        <title>Random Video</title>
+
+        <script>
+            var hiddenTimer;
+            var isHidden = false;
+
+            // Fades the cursor after a certain time like in fullscreen videos
+            function fadeTimeout() {
+               if (document.hasFocus()) {
+                    if (isHidden) {
+                        document.querySelector('body').style.cursor = 'crosshair';
+                        isHidden = false;
+                    }
+                    clearTimeout(fadeTimeout);
+                    hiddenTimer = setTimeout(function() {
+                        document.querySelector('body').style.cursor = 'none';
+                        isHidden = true;
+                    }, 3000);
+                }
+            }
+
+            function addListener() {
+                window.addEventListener('mousemove', fadeTimeout);
+            }
+
+            document.addEventListener('DOMContentLoaded', addListener);
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid video-container">
+            <!--boiler plate code from https://getbootstrap.com/docs/4.0/utilities/embed/-->
+            <div class="embed-responsive embed-responsive-21by9">
+                <iframe class="embed-responsive-item" style="border: 0;"
+                src="https://www.youtube-nocookie.com/embed/33crJ6BiJ20?rel=0&enablejsapi=1&playsinline=1&modestbranding=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/components/navbar/-->
+        <!--Represents a dark navbar with navbar collapsing into button if window smaller than medium size-->
+        <nav class="navbar navbar-dark navbar-expand-md fixed-top">
+            <div class="container">
+                <!--top left brand logo/name-->
+                <a class="navbar-brand" href="./index.html">Gallery</a>
+                <!--top right button to link to other pages-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarbutton">
+                    <!--default button icon for navbar in bootstrap-->
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--navbar to be collapsed, hidden items until navbar-toggler is clicked-->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarbutton">
+                    <!--contents inside the navbar-->
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="./index.html">Home</a>
+                        <a class="nav-link" href="./interests.html">Interests</a>
+                        <a class="nav-link active" href="#">Random Video</a>
+                        <a class="nav-link" href="./credits.html">Credits</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>

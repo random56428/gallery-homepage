@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        <link href="interestsstyles.css" rel="stylesheet">
+        <link rel="icon" href="./icon/icon.png" type="image/x-icon">
+
+        <title>Interests</title>
+
+        <script>
+            let playing = false;
+            let audio = new Audio("./video/worlds2016.mp4");
+            audio.loop = true;
+            audio.volume = 0.5;
+
+            function playStopMusic() {
+                if (playing) {
+                    document.querySelector('.music-icon').src = "./icon/playmusic.jpg"
+                    playing = false;
+                    audio.pause();
+                } else {
+                    document.querySelector('.music-icon').src = "./icon/mutemusic.jpg"
+                    playing = true;
+                    audio.play();
+                }
+            }
+
+            function increaseDecreaseVolume() {
+                audio.volume = document.querySelector('#volume-slider').value / 10;
+            }
+
+            function addListener() {
+                document.querySelector('.music-icon').addEventListener('click', playStopMusic);
+                document.querySelector('#volume-slider').addEventListener('input', increaseDecreaseVolume);
+            }
+
+            document.addEventListener('DOMContentLoaded', addListener);
+        </script>
+    </head>
+    <body>
+        <div class="outer-outer-container">
+            <section>
+                <div class="video-container">
+                    <div class="opaque-container"></div>
+                    <!-- lower quality videos to save bandwidth -->
+                    <!-- add autoplay later-->
+                    <video muted loop autoplay>
+                        <source src="./video/worlds2016.mp4" type="video/mp4">
+                        Your browser does not support this video.
+                    </video>
+                    <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/components/jumbotron/-->
+                    <!--This represents the text in the middle of the site-->
+                    <div class="middle-container">
+                        <div class="jumbotron">
+                            <div class="container">
+                                <h1 class="display-4">Interests</h1>
+                                <p>I'm just a random university student studying Computer Science</p>
+                                <p>Here are some of my interests below</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/components/navbar/-->
+                <!--Represents a dark navbar with navbar collapsing into button if window smaller than medium size-->
+                <nav class="navbar navbar-dark navbar-expand-md fixed-top">
+                    <div class="container">
+                        <!--top left brand logo/name-->
+                        <a class="navbar-brand" href="./index.html">Gallery</a>
+                        <!--top right button to link to other pages-->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarbutton">
+                            <!--default button icon for navbar in bootstrap-->
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!--navbar to be collapsed, hidden items until navbar-toggler is clicked-->
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarbutton">
+                            <!--contents inside the navbar-->
+                            <div class="navbar-nav">
+                                <a class="nav-link" href="./index.html">Home</a>
+                                <a class="nav-link active" href="#">Interests</a>
+                                <a class="nav-link" href="./randomvideo.html">Random Video</a>
+                                <a class="nav-link" href="./credits.html">Credits</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!--using a transparent navbar to position music button-->
+                <nav class="navbar fixed-bottom bg-transparent">
+                    <div class="container justify-content-start">
+                        <img src="./icon/playmusic.jpg" class="navbar-left music-icon rounded" alt="Play music icon">
+                        <div id="spacer"></div>
+                        <div class="music-container">
+                            <div class="volume-container">
+                                <input type="range" min="0" max="10" value="5" id="volume-slider">
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+            <section class="sec2">
+                <div class="container h-100" style="display: flex; align-items: center;">
+                    <!--This code boiler plate is from https://getbootstrap.com/docs/4.0/components/card/-->
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 mt-1">
+                            <div class="card">
+                                <img class="card-img-top" src="./images/javapython.png" alt="Java and Python image">
+                                <div class="card-body bg-light">
+                                    <h5 class="card-title">Coding</h5>
+                                    <p class="card-text">I love to make new programming projects</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-1">
+                            <div class="card">
+                                <img class="card-img-top" src="./images/arknights.jpg" alt="Arknights image">
+                                <div class="card-body light">
+                                    <h5 class="card-title">Hobbies</h5>
+                                    <p class="card-text">I like to play video games and watch japanese animations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sec2">
+                <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/content/figures/-->
+                <div class="container h-100 d-flex align-items-center justify-content-center">
+                    <figure class="figure">
+                        <img src="./images/cat.jpg" class="figure-img img-fluid rounded" alt="A cat image" style="width: 500px;">
+                        <figcaption class="figure-caption text-white">Here's a random cat!</figcaption>
+                    </figure>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

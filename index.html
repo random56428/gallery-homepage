@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <link rel="icon" href="./icon/icon.png" type="image/x-icon">
+
+        <title>Home</title>
+
+        <script>
+            // youtube player
+            var player;
+            var playing = false;
+
+            function playStopMusic() {
+                if (playing) {
+                    document.querySelector('.music-icon').src = "./icon/playmusic.jpg"
+                    player.pauseVideo();
+                    playing = false;
+                } else {
+                    document.querySelector('.music-icon').src = "./icon/mutemusic.jpg"
+                    player.playVideo();
+                    playing = true;
+                }
+            }
+
+            function increaseDecreaseVolume() {
+                player.setVolume(document.querySelector('#volume-slider').value * 10)
+            }
+
+            function addListener() {
+                document.querySelector('.music-icon').addEventListener('click', playStopMusic);
+                document.querySelector('#volume-slider').addEventListener('input', increaseDecreaseVolume);
+            }
+
+            document.addEventListener('DOMContentLoaded', addListener);
+
+            // Used api here: https://developers.google.com/youtube/iframe_api_reference
+            // The following code snippets are from youtube iframe api
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+            }
+
+            // The following code snippets are from youtube iframe api
+            function onPlayerReady(event) {
+                event.target.setVolume(50);
+                document.querySelector('.music-icon').addEventListener('click', playStopMusic);
+                document.querySelector('#volume-slider').addEventListener('input', increaseDecreaseVolume);
+            }
+        </script>
+    </head>
+    <body>
+        <!--embeded link from youtube, nocookie for privacy-->
+        <div style="position: absolute; opacity: 0; padding: 0; margin:0; width: 0; height: 0;">
+            <iframe id="player" style="border: 0;" width="0" height="0"
+            src="https://www.youtube-nocookie.com/embed/6kEZEvMYKQY?enablejsapi=1&playsinline=1&loop=1&disablekb=1&playlist=6kEZEvMYKQY&rel=0&fs=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <!--get the youtube api-->
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <div class="outer-container">
+            <div class="opaque-container"></div>
+            <div class="video-container">
+                <!-- lower quality videos to save bandwidth -->
+                <!-- add autoplay later-->
+                <video muted loop autoplay>
+                    <source src="./video/starguardian.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+            </div>
+            <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/components/navbar/-->
+            <!--Represents a dark navbar with navbar collapsing into button if window smaller than medium size-->
+            <nav class="navbar navbar-dark navbar-expand-md fixed-top">
+                <div class="container">
+                    <!--top left brand logo/name-->
+                    <a class="navbar-brand" href="#">Gallery</a>
+                    <!--top right button to link to other pages-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarbutton">
+                        <!--default button icon for navbar in bootstrap-->
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!--navbar to be collapsed, hidden items until navbar-toggler is clicked-->
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarbutton">
+                        <!--contents inside the navbar-->
+                        <div class="navbar-nav">
+                            <a class="nav-link active" href="#">Home</a>
+                            <a class="nav-link" href="./interests.html">Interests</a>
+                            <a class="nav-link" href="./randomvideo.html">Random Video</a>
+                            <a class="nav-link" href="./credits.html">Credits</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!--This code boiler plate is from https://getbootstrap.com/docs/4.6/components/jumbotron/-->
+            <!--this represents the text in the middle of the site-->
+            <div class="middle-container">
+                <div class="jumbotron bg-transparent text-center">
+                    <div class="container">
+                        <h1 class="display-4 p-4">Welcome</h1>
+                        <!--<p><i>Desktop for best experience</i></p>-->
+                        <a class="btn btn-outline-light" role="button" href="./interests.html">Enter</a>
+                    </div>
+                </div>
+            </div>
+            <!--using a transparent navbar to position music button-->
+            <nav class="navbar fixed-bottom bg-transparent">
+                <div class="container justify-content-start">
+                    <img src="./icon/playmusic.jpg" class="navbar-left music-icon rounded" alt="Play music icon">
+                    <div id="spacer"></div>
+                    <div class="music-container">
+                        <div class="volume-container">
+                            <input type="range" min="0" max="10" value="5" id="volume-slider">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
